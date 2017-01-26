@@ -1,7 +1,7 @@
-var addItemToTodoList = function(event) {
+var addTaskToTodoList = function(event) {
     event.preventDefault();
     if (event.keyCode == 13) {
-        var input = document.getElementById("todo-add-item-input");
+        var input = document.getElementById("todo-add-task-input");
         newTodoItem(input.value);
         input.value = "";
     }
@@ -14,7 +14,7 @@ var newTodoItem = function(text) {
     grid.classList.add("pure-u-1");
 
     var todoItem = document.createElement("div");
-    todoItem.classList.add("todo-list-item");
+    todoItem.classList.add("todo-list-task");
     todoItem.classList.add("pure-form");
     grid.appendChild(todoItem);
 
@@ -32,7 +32,7 @@ var domContentLoaded = function() {
     newTodoItem("thing 1");
     newTodoItem("thing 2");
     
-    document.getElementById("todo-add-item-input").addEventListener("keyup", addItemToTodoList);
+    document.getElementById("todo-add-task-input").addEventListener("keyup", addTaskToTodoList);
 };
 
 document.addEventListener("DOMContentLoaded", domContentLoaded, true);

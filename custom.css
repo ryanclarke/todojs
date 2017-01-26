@@ -1,4 +1,4 @@
-.todo-list-item {
+.todo-list-task {
     background-color: skyblue;
     border: 1em;
     border-color: black;
@@ -7,7 +7,7 @@
     border-radius: .5em;
 }
 
-#todo-add-item {
+#todo-add-task {
     background-color: skyblue;
     border: 1em;
     border-color: black;
