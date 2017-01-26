@@ -1,0 +1,17 @@
+.todo-list-item {
+    background-color: skyblue;
+    border: 1em;
+    border-color: black;
+    margin: .2em;
+    padding: .5em;
+    border-radius: .5em;
+}
+
+#todo-add-item {
+    background-color: skyblue;
+    border: 1em;
+    border-color: black;
+    margin: .2em;
+    padding: .5em;
+    border-radius: .5em;
+}
