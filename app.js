@@ -10,22 +10,30 @@ var addTaskToTodoList = function(event) {
 var newTodoItem = function(text) {
     var list = document.getElementById("todo-list");
 
-    var grid = document.createElement("div");
-    grid.classList.add("pure-u-1");
-
-    var todoItem = document.createElement("div");
-    todoItem.classList.add("todo-list-task");
-    todoItem.classList.add("pure-form");
-    grid.appendChild(todoItem);
+    var task = document.createElement("div");
+    task.classList.add("todo-list-task");
+    task.classList.add("pure-form");
+    task.classList.add("pure-u-1");
 
     var label = document.createElement("label");
     var id = `${new Date().valueOf()}${Math.random()}`;
     label.setAttribute("for", id);
     label.classList.add("pure-checkbox");
-    label.innerHTML = `<input id="${id}" type="checkbox"> ${text}`;
-    todoItem.appendChild(label);
 
-    list.appendChild(grid);
+    var input = document.createElement("input");
+    input.type = "checkbox";
+    input.id = id;
+    input.onchange = function() {
+        if (input.checked) {
+            list.removeChild(task);
+        }
+    };
+    task.appendChild(input);
+
+    var text = document.createTextNode(" " + text);
+    task.appendChild(text);
+
+    list.appendChild(task);
 };
 
 var domContentLoaded = function() {
