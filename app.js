@@ -1,25 +1,22 @@
 var task = {
-    create: function(text) {
+    template: {
+        original: document.querySelector("#task-template").content.firstElementChild,
+        clone() {
+            return document.importNode(this.original, true)
+        }
+    },
+    addToList(text) {
         var taskId = `${new Date().valueOf()}${Math.random()}`;
 
         var list = document.getElementById("todo-list");
 
-        var task = document.createElement("div");
-        task.classList.add("todo-list-task");
-        task.classList.add("pure-form-aligned");
-        task.classList.add("pure-u-1");
-
-        var label = document.createElement("label");
+        var task = this.template.clone();
+        var label = task.firstElementChild;
         label.setAttribute("for", taskId);
-        label.classList.add("pure-checkbox");
-        task.appendChild(label);
-
-        var checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
+        var checkbox = label.firstElementChild;
         checkbox.id = taskId;
         checkbox.onchange = onTaskChecked(checkbox, list, task);
-        label.appendChild(checkbox);
-
+        
         var text = document.createTextNode(` ${text}`);
         label.appendChild(text);
 
@@ -31,7 +28,7 @@ var addTaskToTodoList = function(event) {
     event.preventDefault();
     if (event.keyCode == 13) {
         var input = document.getElementById("todo-add-task-input");
-        task.create(input.value);
+        task.addToList(input.value);
         input.value = "";
     }
 }
@@ -46,8 +43,8 @@ var onTaskChecked = function(input, list, task) {
 }
 
 var domContentLoaded = function() {
-    task.create("thing 1");
-    task.create("thing 2");
+    task.addToList("thing 1");
+    task.addToList("thing 2");
     
     document.getElementById("todo-add-task-input").addEventListener("keyup", addTaskToTodoList);
 }
