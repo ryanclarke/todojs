@@ -12,7 +12,13 @@ ul {
     cursor: pointer
 }
 
-.todo-list-task:first-child .task-priority-increase {
+.task-list {
+    background-color: #eeeeee;
+    padding: 0.5em;
+}
+
+.todo-list-task:first-child .task-priority-increase,
+#done-list .task-priority-increase {
     visibility: hidden;
 }
 
@@ -32,4 +38,8 @@ ul {
     margin: .2em;
     padding: .5em;
     border-radius: .5em;
+}
+
+#done-list .todo-list-task {
+    background-color: gray;
 }

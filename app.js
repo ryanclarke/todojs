@@ -18,7 +18,7 @@ var todoList = {
 
         label.setAttribute("for", taskId);
         checkbox.id = taskId;
-        checkbox.onchange = todoTask.completed(checkbox, list, task);
+        checkbox.onchange = todoTask.complete(checkbox, task);
 
         prioritize.onclick = todoTask.prioritize(list, task);
 
@@ -37,10 +37,26 @@ var todoList = {
 }
 
 var todoTask = {
-    completed(input, list, task) {
+    complete(input, task) {
         var event = function() {
             if (input.checked) {
-                list.removeChild(task);
+                var todoList = document.getElementById("todo-list");
+                todoList.removeChild(task);
+                var doneList = document.getElementById("done-list");
+                doneList.insertBefore(task, doneList.firstChild);
+                task.onchange = todoTask.uncomplete(input, task);
+            }
+        }
+        return event;
+    },
+    uncomplete(input, task) {
+        var event = function() {
+            if (!input.checked) {
+                var doneList = document.getElementById("done-list");
+                doneList.removeChild(task);
+                var todoList = document.getElementById("todo-list");
+                todoList.insertBefore(task, todoList.firstChild);
+                task.onchange = todoTask.complete(input, task);
             }
         }
         return event;
