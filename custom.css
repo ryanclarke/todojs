@@ -1,3 +1,21 @@
+ul {
+    list-style: none;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+
+.task-checkarea:hover,
+.task-priority-increase:hover {
+    cursor: pointer
+}
+
+.todo-list-task:first-child .task-priority-increase {
+    visibility: hidden;
+}
+
 .todo-list-task {
     background-color: skyblue;
     border: 1em;
