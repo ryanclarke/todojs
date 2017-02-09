@@ -12,12 +12,13 @@ var task = {
 
         var task = this.template.clone();
         var label = task.firstElementChild;
-        label.setAttribute("for", taskId);
         var checkbox = label.firstElementChild;
+        var text = document.createTextNode(` ${text}`);
+
+        label.setAttribute("for", taskId);
         checkbox.id = taskId;
         checkbox.onchange = onTaskChecked(checkbox, list, task);
-        
-        var text = document.createTextNode(` ${text}`);
+
         label.appendChild(text);
 
         list.appendChild(task);
