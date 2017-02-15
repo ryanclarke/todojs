@@ -73,7 +73,9 @@ var domContentLoaded = function() {
     todoList.addTask("thing 1");
     todoList.addTask("thing 2");
 
-    document.getElementById("todo-add-task-input").addEventListener("keyup", todoList.onEnterPressed);
+    var addNewTask = document.getElementById("todo-add-task-input");
+    addNewTask.focus();
+    addNewTask.addEventListener("keyup", todoList.onEnterPressed);
 }
 
 document.addEventListener("DOMContentLoaded", domContentLoaded, true);
