@@ -1,25 +1,25 @@
-var app = {
+var APP = {
     todoList: document.getElementById("todo-list"),
     doneList: document.getElementById("done-list"),
     newTaskInput: document.getElementById("todo-add-task-input")
-}
+};
 
 var todoList = {
     taskTemplate: {
         original: document.querySelector("#task-template").content.firstElementChild,
-        clone() {
+        clone: function () {
             return document.importNode(this.original, true);
         }
     },
-    addTask(text) {
-        var taskId = `${new Date().valueOf()}${Math.random()}`;
+    addTask: function (text) {
+        var taskId = new Date().valueOf() + Math.random();
 
         var task = this.taskTemplate.clone();
         var label = task.firstElementChild;
         var checkbox = label.firstElementChild;
         var prioritize = task.querySelector(".task-priority-increase");
         var discard = task.querySelector(".task-discard");
-        var text = document.createTextNode(` ${text}`);
+        var textNode = document.createTextNode(" " + text);
 
         label.setAttribute("for", taskId);
         checkbox.id = taskId;
@@ -28,60 +28,60 @@ var todoList = {
         prioritize.onclick = todoTask.prioritize(task);
         discard.onclick = todoTask.discard(task);
 
-        label.appendChild(text);
+        label.appendChild(textNode);
 
-        app.todoList.appendChild(task);
+        APP.todoList.appendChild(task);
     },
-    onEnterPressed(event) {
+    onEnterPressed: function (event) {
         event.preventDefault();
-        if (event.keyCode == 13) {
-            todoList.addTask(app.newTaskInput.value);
-            app.newTaskInput.value = "";
+        if (event.keyCode === 13) {
+            todoList.addTask(APP.newTaskInput.value);
+            APP.newTaskInput.value = "";
         }
     }
-}
+};
 
 var todoTask = {
-    complete(input, task) {
-        var event = function() {
+    complete: function (input, task) {
+        var event = function () {
             if (input.checked) {
-                app.todoList.removeChild(task);
-                app.doneList.insertBefore(task, app.doneList.firstChild);
+                APP.todoList.removeChild(task);
+                APP.doneList.insertBefore(task, APP.doneList.firstChild);
                 task.onchange = todoTask.uncomplete(input, task);
             }
-        }
+        };
         return event;
     },
-    uncomplete(input, task) {
-        var event = function() {
+    uncomplete: function (input, task) {
+        var event = function () {
             if (!input.checked) {
-                app.doneList.removeChild(task);
-                app.todoList.insertBefore(task, app.todoList.firstChild);
+                APP.doneList.removeChild(task);
+                APP.todoList.insertBefore(task, APP.todoList.firstChild);
                 task.onchange = todoTask.complete(input, task);
             }
-        }
+        };
         return event;
     },
-    prioritize(task) {
-        var event = function() {
+    prioritize: function (task) {
+        var event = function () {
             task.parentNode.insertBefore(task, task.previousSibling);
-        }
+        };
         return event;
     },
-    discard(task) {
-        var event = function() {
+    discard: function (task) {
+        var event = function () {
             task.parentNode.removeChild(task);
-        }
+        };
         return event;
     }
-}
+};
 
-var domContentLoaded = function() {
+var domContentLoaded = function () {
     todoList.addTask("thing 1");
     todoList.addTask("thing 2");
 
-    app.newTaskInput.focus();
-    app.newTaskInput.addEventListener("keyup", todoList.onEnterPressed);
-}
+    APP.newTaskInput.focus();
+    APP.newTaskInput.addEventListener("keyup", todoList.onEnterPressed);
+};
 
 document.addEventListener("DOMContentLoaded", domContentLoaded, true);
