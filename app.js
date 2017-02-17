@@ -14,6 +14,7 @@ var todoList = {
         var label = task.firstElementChild;
         var checkbox = label.firstElementChild;
         var prioritize = task.querySelector(".task-priority-increase");
+        var discard = task.querySelector(".task-discard");
         var text = document.createTextNode(` ${text}`);
 
         label.setAttribute("for", taskId);
@@ -21,6 +22,7 @@ var todoList = {
         checkbox.onchange = todoTask.complete(checkbox, task);
 
         prioritize.onclick = todoTask.prioritize(list, task);
+        discard.onclick = todoTask.discard(task);
 
         label.appendChild(text);
 
@@ -64,6 +66,12 @@ var todoTask = {
     prioritize(list, task) {
         var event = function() {
             list.insertBefore(task, task.previousSibling);
+        }
+        return event;
+    },
+    discard(task) {
+        var event = function() {
+            task.parentNode.removeChild(task);
         }
         return event;
     }

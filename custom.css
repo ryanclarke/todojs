@@ -8,7 +8,8 @@ ul {
 }
 
 .task-checkarea:hover,
-.task-priority-increase:hover {
+.task-priority-increase:hover,
+.task-discard:hover {
     cursor: pointer
 }
 
@@ -17,9 +18,15 @@ ul {
     padding: 0.5em;
 }
 
+.task-discard {
+    color: red;
+    font-weight: bold;
+}
+
 .todo-list-task:first-child .task-priority-increase,
-#done-list .task-priority-increase {
-    visibility: hidden;
+#done-list .task-priority-increase,
+#todo-list .task-discard {
+    display: none;
 }
 
 .todo-list-task {
@@ -41,5 +48,5 @@ ul {
 }
 
 #done-list .todo-list-task {
-    background-color: gray;
+    background-color: lightgray;
 }
