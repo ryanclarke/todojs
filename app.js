@@ -12,8 +12,6 @@ var todoList = {
         }
     },
     addTask: function (text) {
-        var taskId = new Date().valueOf() + Math.random();
-
         var task = this.taskTemplate.clone();
         var label = task.firstElementChild;
         var checkbox = label.firstElementChild;
@@ -21,8 +19,6 @@ var todoList = {
         var discard = task.querySelector(".task-discard");
         var textNode = document.createTextNode(" " + text);
 
-        label.setAttribute("for", taskId);
-        checkbox.id = taskId;
         checkbox.onchange = todoTask.complete(checkbox, task);
 
         prioritize.onclick = todoTask.prioritize(task);
